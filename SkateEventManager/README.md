@@ -16,3 +16,10 @@ This is the backend for the Skate Rent and Event Planner app, built with ASP.NET
 
 ## 💻 Setup Instructions
 1. **Clone the repository:**
+2. **Download packages:**
+
+   - MySql.EntityFrameworkCore  
+   - Microsoft.EntityFrameworkCore.Tools  
+   - Microsoft.EntityFrameworkCore.Design
+
+3. **Program launches on: "http://localhost:3000"**
