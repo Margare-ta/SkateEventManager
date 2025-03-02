@@ -16,9 +16,9 @@ This is the backend for the Skate Rent and Event Planner app, built with ASP.NET
 
 ## 💻 Setup Instructions
 1. **Clone the repository:**
-2. **Download packages:**
+2. **Download packages with version 8.02:**
 
-   - MySql.EntityFrameworkCore  
+   - Pomelo.EntityFrameworkCore.MySql 
    - Microsoft.EntityFrameworkCore.Tools  
    - Microsoft.EntityFrameworkCore.Design
 
