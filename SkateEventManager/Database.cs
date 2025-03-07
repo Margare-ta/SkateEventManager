@@ -8,6 +8,7 @@ public class DatabaseContext : DbContext
     public DbSet<Event> Events { get; set; }
     public DbSet<User> User { get; set; }
     public DbSet<Book> Rent { get; set; }
+    public DbSet<Skate> Skates { get; set; }
 
     //no password
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
