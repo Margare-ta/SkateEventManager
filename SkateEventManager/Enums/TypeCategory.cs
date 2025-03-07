@@ -3,5 +3,5 @@
 public enum TypeCategory
 {
     Inline,
-    Squad
+    Quad
 }
