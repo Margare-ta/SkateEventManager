@@ -15,9 +15,12 @@ headers {
 }
 
 body:json {
-  { 
-    "Id": 1, 
-    "Name": "AdminUser", 
-    "Email": "user@email.com", 
-    "Role": "Admin" }
+  {
+      "name": "John Doe",
+      "registerRequest": {
+          "email": "johndoe@example.com",
+          "password": "SecurePass123"
+      },
+      "role": 1
+  }
 }
