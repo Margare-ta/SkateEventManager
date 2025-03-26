@@ -1,4 +1,5 @@
-﻿using SkateEventManager.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using SkateEventManager.Enums;
 using SkateEventManager.Models;
 
 namespace SkateEventManager.EndPoints;
@@ -8,11 +9,8 @@ public static class DataSeeding
     public static WebApplication CreateSkateItems(this WebApplication app)
     {
 
-        app.MapGet("/seedData", () =>
+        app.MapGet("/seedData", async (DatabaseContext db) =>
         {
-            using var db = new DatabaseContext();
-
-
             var skates = new List<Skate>
             {
 
@@ -50,17 +48,12 @@ public static class DataSeeding
             };
             db.Skates.AddRange(skates);
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
-            int skatesInDb = db.Skates.ToList().Count;
-            if (skatesInDb == skates.Count)
-            {
-                return Results.Ok("Database correctly seeded.");
-            }
-            else
-            {
-                return Results.Problem("Data is not saved correctly");
-            }
+            int skatesInDb = await db.Skates.CountAsync();
+            return skatesInDb == skates.Count
+                ? Results.Ok("Database correctly seeded.")
+                : Results.Problem("Data is not saved correctly");
 
         });
 
