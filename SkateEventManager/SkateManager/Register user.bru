@@ -1,0 +1,23 @@
+meta {
+  name: Register user
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  { 
+    "Id": 1, 
+    "Name": "AdminUser", 
+    "Email": "user@email.com", 
+    "Role": "Admin" }
+}

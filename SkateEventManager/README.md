@@ -22,5 +22,6 @@ This is the backend for the Skate Rent and Event Planner app, built with ASP.NET
 	- Microsoft.EntityFrameworkCore.Tools  
 	- Microsoft.EntityFrameworkCore.Design
 	- Microsoft.EntityFrameworkCore.Relational
+	- BCrypt.Net-Next (For password hash eith salting)
 
 3. **Program launches on: "http://localhost:3000"**
