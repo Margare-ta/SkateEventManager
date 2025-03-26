@@ -5,9 +5,9 @@ namespace SkateEventManager.Models;
 public class User
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string PasswordInHash { get; set; }
+    public string? Name { get; set; }
+    public string? Email { get; set; }
+    public string? PasswordInHash { get; set; }
     public RoleOfUser Role { get; set; }
 
 
@@ -16,6 +16,6 @@ public class User
 
     public override string ToString()
     {
-        return $"{{ \"Id\": {Id}, \"Name\": \"{Name}\", \"Email\": \"{Email}\", \"PasswordInString\": \"{PasswordInHash}\", \"Role\": \"{Role}\" }}";
+        return $"{{ \"Id\": {Id}, \"Name\": \"{Name}\", \"Email\": \"{Email}\", \"Role\": \"{Role}\" }}";
     }
 }

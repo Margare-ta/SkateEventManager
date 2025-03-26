@@ -5,12 +5,13 @@ namespace SkateEventManager;
 
 public class DatabaseContext : DbContext
 {
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
     public DbSet<Event> Events { get; set; }
     public DbSet<User> User { get; set; }
     public DbSet<Book> Rent { get; set; }
     public DbSet<Skate> Skates { get; set; }
 
-    //no password
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseMySql(
