@@ -1,44 +1,38 @@
-﻿namespace SkateEventManager.EndPoints;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SkateEventManager.EndPoints;
 
 public static class ManageSkates
 {
-    public static WebApplication ManageSkate(this WebApplication application)
+    public static void ManageSkate(this WebApplication app)
     {
-        //get all skate
-        application.MapGet("/skates", () =>
+        // Get all skates
+        app.MapGet("/skates", async (DatabaseContext db) =>
         {
-            string skateData = "";
-            using var db = new DatabaseContext();
-
-            var skates = db.Skates
-                            .ToList();
-            foreach (var item in skates)
-            {
-                skateData += item.ToString();
-            }
-            return skateData;
+            var skates = await db.Skates.ToListAsync();
+            return skates.Count > 0 ? Results.Ok(skates) : Results.NotFound("No skates found.");
         });
 
-        //get skate by id
-        application.MapGet("/skates/{id}", (string id) =>
+        // Get skate by id
+        app.MapGet("/skates/{id}", async (int id, DatabaseContext db) =>
         {
-            if (!int.TryParse(id, out int skateId))
-            {
-                return "Invalid ID format.";
-            }
-
-            string? searchedSkate = null;
-            using var db = new DatabaseContext();
-            var skates = db.Skates
-                           .Where(item => item.Id == skateId);
-
-            foreach (var item in skates)
-            {
-                searchedSkate += item.ToString();
-            }
-            return searchedSkate is not null ? searchedSkate : "Skate not found.";
+            var skate = await db.Skates.FindAsync(id);
+            return skate is not null ? Results.Ok(skate) : Results.NotFound("Skate not found.");
         });
 
-        return application;
+        // Delete skate by id
+        app.MapDelete("/skates/{id}", async (int id, DatabaseContext db) =>
+        {
+            var skate = await db.Skates.FindAsync(id);
+            if (skate is null)
+            {
+                return Results.NotFound("Skate not found.");
+            }
+
+            db.Skates.Remove(skate);
+            await db.SaveChangesAsync();
+
+            return Results.Ok("Skate removed successfully.");
+        });
     }
 }
