@@ -14,7 +14,7 @@ public static class AuthenticationEndpoints
             return Results.Ok(new { message = "User registered successfully!" });
         });
 
-        app.MapPost("/api/auth/login", (UserAuthentication authService, LoginRequest request) =>//async??
+        app.MapPost("/api/auth/login", (UserAuthentication authService, LoginRequest request) =>
         {
             bool success = authService.LoginUser(request.Email, request.Password);
             if (!success) return Results.Unauthorized();

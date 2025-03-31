@@ -4,22 +4,13 @@ public static class ManageUsers
 {
     public static WebApplication GetUsers(this WebApplication app)
     {
-        app.MapGet("/currentUser/{id}", (string id, DatabaseContext db) =>
+        app.MapGet("/currentUser/{id}", (int id, DatabaseContext db) =>
         {
-            if (!int.TryParse(id, out int userId))
-            {
-                return "Invalid ID format.";
-            }
+            var user = db.User.FirstOrDefault(u => u.Id == id);
 
-            string? searchedUser = null;
-            var user = db.User
-                           .Where(item => item.Id == userId);
-
-            foreach (var item in user)
-            {
-                searchedUser += item.ToString();
-            }
-            return searchedUser is not null ? searchedUser : "User not found.";
+            return user != null
+                ? Results.Ok(user)
+                : Results.NotFound("User not found.");
         });
 
         return app;
