@@ -8,6 +8,9 @@ public class Book
     public double FeetSize { get; set; }
     public int SkateID { get; set; }
 
+    //inline or squad?
+    //woman or men??
+
     // Navigation properties
     public User User { get; set; } = null!;
     public Event Event { get; set; } = null!;
