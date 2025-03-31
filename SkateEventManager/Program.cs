@@ -18,7 +18,10 @@ var app = builder.Build();
 app.CreateSkateItems();
 app.ManageSkate();
 app.ManageUser();
+app.ManageEvenet();
+app.ManageRent();
 app.GetUsers();
+app.GetDashboard();
 app.MapGet("/", () => "Hello World!");
 
 app.Run();
