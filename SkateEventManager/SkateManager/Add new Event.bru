@@ -1,0 +1,26 @@
+meta {
+  name: Add new Event
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:3000/events
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "startDate": "2025-05-01T10:00:00",
+      "endDate": "2025-05-03T18:00:00",
+      "name": "Spring Festival",
+      "availablePlaces": 200,
+      "accommodation": 50,
+      "reserved": 50
+  }
+}
