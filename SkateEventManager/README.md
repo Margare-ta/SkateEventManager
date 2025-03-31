@@ -25,3 +25,7 @@ This is the backend for the Skate Rent and Event Planner app, built with ASP.NET
 	- BCrypt.Net-Next (For password hash eith salting)
 
 3. **Program launches on: "http://localhost:3000"**
+
+Important notes:
+Rents is defind as Book here!
+1 user can book for multiple events
