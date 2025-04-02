@@ -1,0 +1,25 @@
+meta {
+  name: Update rent
+  type: http
+  seq: 16
+}
+
+put {
+  url: http://localhost:3000/rents/10
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "id" : 11,
+      "userID": 2,
+      "eventID": 2,
+      "skateID": 102,
+      "feetSize": 44
+  }
+}

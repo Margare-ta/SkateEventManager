@@ -1,0 +1,15 @@
+meta {
+  name: Delete Rent by id
+  type: http
+  seq: 17
+}
+
+delete {
+  url: http://localhost:3000/rents/?id=5
+  body: none
+  auth: none
+}
+
+params:query {
+  id: 5
+}

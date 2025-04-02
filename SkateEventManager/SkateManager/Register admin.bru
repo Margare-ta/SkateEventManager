@@ -1,7 +1,7 @@
 meta {
-  name: Register user
+  name: Register admin
   type: http
-  seq: 9
+  seq: 15
 }
 
 post {
@@ -16,11 +16,11 @@ headers {
 
 body:json {
   {
-      "name": "John Doe",
+      "name": "Admin",
       "registerRequest": {
-          "email": "johndoe@example.com",
-          "password": "SecurePass123"
+          "email": "admin@example.com",
+          "password": "adminjelszo234"
       },
-      "role": 1
+      "role": 0
   }
 }
