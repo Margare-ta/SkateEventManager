@@ -1,4 +1,6 @@
-﻿namespace SkateEventManager.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace SkateEventManager.Models;
 
 public class Book
 {
@@ -12,8 +14,10 @@ public class Book
     //woman or men??
 
     // Navigation properties
+
     public User User { get; set; } = null!;
     public Event Event { get; set; } = null!;
+    [JsonIgnore]
     public Skate Skate { get; set; } = null!;
 
     public override string? ToString()

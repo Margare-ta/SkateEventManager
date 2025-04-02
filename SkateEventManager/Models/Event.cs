@@ -8,7 +8,7 @@ public class Event
     public required string Name { get; set; }
     public int AvailablePLaces { get; set; }
     public int Accommodation { get; set; }
-    public int Reserved { get; set; }//ez meg mi???
+    public int Reserved { get; set; }
 
     // Navigation Property (One Event → Many Books)
     public List<Book> Books { get; set; } = new();
