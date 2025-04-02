@@ -16,8 +16,16 @@ public static class ManageSkates
         // Get skate by id
         app.MapGet("/skates/{id}", async (int id, DatabaseContext db) =>
         {
-            var skate = await db.Skates.FindAsync(id);
-            return skate is not null ? Results.Ok(skate) : Results.NotFound("Skate not found.");
+            try
+            {
+                var skate = await db.Skates.FindAsync(id);
+                return skate is not null ? Results.Ok(skate) : Results.NotFound("Skate not found.");
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+
         });
 
         // Delete skate by id

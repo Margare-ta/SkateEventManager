@@ -1,0 +1,26 @@
+meta {
+  name: Add new Event
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost:3000/events
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "startDate": "2025-06-11T10:00:00",
+      "endDate": "2025-06-12T18:00:00",
+      "name": "Skate Ring at Liget",
+      "availablePlaces": 80,
+      "accommodation": 0,
+      "reserved": 17
+  }
+}

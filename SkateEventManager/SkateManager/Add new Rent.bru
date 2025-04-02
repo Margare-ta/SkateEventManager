@@ -1,0 +1,24 @@
+meta {
+  name: Add new Rent
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:3000/rents
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "UserId": 5,
+      "EventId": 3,
+      "FeetSize": 44,
+      "SkateId": 102
+  }
+}
