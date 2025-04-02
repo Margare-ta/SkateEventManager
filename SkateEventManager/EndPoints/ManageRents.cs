@@ -30,27 +30,21 @@ public static class ManageRents
             }
 
             var userExists = await db.User.AnyAsync(u => u.Id == rent.UserID);
-            if (!userExists)
-            {
-                return Results.BadRequest("Invalid UserID. User does not exist.");
-            }
-
             var eventExists = await db.Events.AnyAsync(e => e.Id == rent.EventID);
-            if (!eventExists)
-            {
-                return Results.BadRequest("Invalid EventID. Event does not exist.");
-            }
-
             var skate = await db.Skates.FindAsync(rent.SkateID);
-            if (skate == null)
+            if (!userExists || !eventExists || skate == null)
             {
-                return Results.BadRequest("Invalid SkateID. Skate does not exist.");
+                return Results.BadRequest("Invalid User or Event or Skate ID. Does not exist.");
             }
 
-            bool isSkateTaken = await db.Rent.AnyAsync(r => r.SkateID == rent.SkateID);
-            if (isSkateTaken)
+
+            if (rent.SkateID != 0)
             {
-                return Results.BadRequest("This skate is already rented.");
+                bool isSkateTaken = await db.Rent.AnyAsync(r => r.SkateID == rent.SkateID && r.EventID == rent.EventID);
+                if (isSkateTaken)
+                {
+                    return Results.BadRequest("This skate is already rented.");
+                }
             }
 
             if (skate.Size != rent.FeetSize)
@@ -58,11 +52,76 @@ public static class ManageRents
                 return Results.BadRequest($"Feet size mismatch. This skate is size {skate.Size}.");
             }
 
+
+
             db.Rent.Add(rent);
             await db.SaveChangesAsync();
 
-            return Results.Created($"/rents/{rent.Id}", rent);
+            var response = new
+            {
+                rent.Id,
+                rent.UserID,
+                rent.EventID,
+                rent.SkateID
+            };
 
+            return Results.Created($"/rents/{rent.Id}", response);
+
+        });
+
+        //Update rented skate
+        app.MapPut("/rents/{id}", async (int id, Book updatedRent, DatabaseContext db) =>
+        {
+            var existingRent = await db.Rent.FindAsync(id);
+            if (existingRent == null)
+            {
+                return Results.NotFound("Rent not found.");
+            }
+
+            var userExists = await db.User.AnyAsync(u => u.Id == updatedRent.UserID);
+            var eventExists = await db.Events.AnyAsync(e => e.Id == updatedRent.EventID);
+            var skate = await db.Skates.FindAsync(updatedRent.SkateID);
+            if (!userExists || !eventExists || skate == null)
+            {
+                return Results.BadRequest("Invalid User or Event or Skate ID. Does not exist.");
+            }
+
+            if (existingRent.SkateID != 0)
+            {
+                bool isSkateTaken = await db.Rent.AnyAsync(r => r.SkateID == updatedRent.SkateID && r.EventID == updatedRent.EventID && r.Id != id);
+                if (isSkateTaken)
+                {
+                    return Results.BadRequest("This skate is already rented for this event.");
+                }
+            }
+
+            if (skate.Size != updatedRent.FeetSize)
+            {
+                return Results.BadRequest($"Feet size mismatch. This skate is size {skate.Size}.");
+            }
+
+            existingRent.UserID = updatedRent.UserID;
+            existingRent.EventID = updatedRent.EventID;
+            existingRent.FeetSize = updatedRent.FeetSize;
+            existingRent.SkateID = updatedRent.SkateID;
+
+            await db.SaveChangesAsync();
+
+            return Results.Ok(existingRent);
+        });
+
+        app.MapDelete("/rents/{id}", async (int id, DatabaseContext db) =>
+        {
+            var rent = await db.Rent.FindAsync(id);
+            if (rent is null)
+            {
+                return Results.NotFound("Rent not found.");
+            }
+
+            db.Rent.Remove(rent);
+            await db.SaveChangesAsync();
+
+            return Results.Ok("Rent removed successfully.");
         });
         return app;
     }

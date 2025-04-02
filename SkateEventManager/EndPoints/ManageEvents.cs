@@ -41,6 +41,21 @@ public static class ManageEvents
 
             return Results.Created();
         });
+
+        //Delete Event
+        app.MapDelete("/events/{id}", async (int id, DatabaseContext db) =>
+        {
+            var newEvent = await db.Events.FindAsync(id);
+            if (newEvent is null)
+            {
+                return Results.NotFound("Event not found.");
+            }
+
+            db.Events.Remove(newEvent);
+            await db.SaveChangesAsync();
+
+            return Results.Ok("Event removed successfully.");
+        });
         return app;
     }
 }
