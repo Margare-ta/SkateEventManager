@@ -12,7 +12,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     ));
 
 builder.Services.AddScoped<UserAuthentication>();
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.CreateSkateItems();
@@ -24,5 +25,10 @@ app.GetUsers();
 app.GetDashboard();
 app.MapGet("/", () => "Hello World!");
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();
