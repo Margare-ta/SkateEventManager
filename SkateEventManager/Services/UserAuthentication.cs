@@ -22,12 +22,12 @@ public class UserAuthentication
         _context.SaveChanges();
     }
 
-    public bool LoginUser(string email, string password)
+    public int? LoginUser(string email, string password)
     {
         var user = _context.User.FirstOrDefault(u => u.Email == email);
-        if (user == null) return false; // User not found
+        if (user == null) return null; // User not found
 
-        return BCrypt.Verify(password, user.PasswordInHash);
+        return BCrypt.Verify(password, user.PasswordInHash) ? user.Id : null;
     }
 }
 //validáció

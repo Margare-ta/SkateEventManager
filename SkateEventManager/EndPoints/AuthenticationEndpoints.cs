@@ -16,9 +16,13 @@ public static class AuthenticationEndpoints
 
         app.MapPost("/api/auth/login", (UserAuthentication authService, LoginRequest request) =>
         {
-            bool success = authService.LoginUser(request.Email, request.Password);
-            if (!success) return Results.Unauthorized();
-            return Results.Ok(new { message = "Login successful!" });
+            int? userId = authService.LoginUser(request.Email, request.Password);
+            if (userId == null) return Results.Unauthorized();
+            return Results.Ok(new
+            {
+                message = "Login successful!",
+                userId = userId
+            });
         });
     }
 }

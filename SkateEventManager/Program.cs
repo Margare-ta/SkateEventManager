@@ -23,7 +23,6 @@ app.ManageEvenet();
 app.ManageRent();
 app.GetUsers();
 app.GetDashboard();
-app.MapGet("/", () => "Hello World!");
 
 if (app.Environment.IsDevelopment())
 {
