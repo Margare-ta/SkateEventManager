@@ -15,7 +15,9 @@ public class Book
 
     // Navigation properties
 
+    [JsonIgnore]
     public User User { get; set; } = null!;
+    [JsonIgnore]
     public Event Event { get; set; } = null!;
     [JsonIgnore]
     public Skate Skate { get; set; } = null!;

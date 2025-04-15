@@ -17,8 +17,13 @@ public static class ManageRents
         //Get rent by UserId
         app.MapGet("/rents/{UserId}", async (int UserId, DatabaseContext db) =>
         {
-            var searchRent = await db.Events.FindAsync(UserId);
-            return searchRent is not null ? Results.Ok(searchRent) : Results.NotFound("No rent for this user.");
+            var userRents = await db.Rent
+                             .Where(e => e.UserID == UserId)
+                             .ToListAsync();
+
+            return userRents.Any()
+                ? Results.Ok(userRents)
+                : Results.NotFound("No rents found for this user.");
         });
 
         //Add new rent
