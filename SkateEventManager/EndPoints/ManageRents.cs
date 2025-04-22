@@ -18,8 +18,16 @@ public static class ManageRents
         app.MapGet("/rents/{UserId}", async (int UserId, DatabaseContext db) =>
         {
             var userRents = await db.Rent
-                             .Where(e => e.UserID == UserId)
-                             .ToListAsync();
+                .Where(b => b.UserID == UserId)
+                .Include(b => b.Event)
+                .Select(b => new
+                {
+                    EventId = b.Event.Id,
+                    EventName = b.Event.Name,
+                    StartDate = b.Event.StartDate,
+                    EndDate = b.Event.EndDate
+                })
+                .ToListAsync();
 
             return userRents.Any()
                 ? Results.Ok(userRents)
