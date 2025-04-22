@@ -35,15 +35,20 @@ public static class ManageRents
             }
 
             var userExists = await db.User.AnyAsync(u => u.Id == rent.UserID);
-            var eventExists = await db.Events.AnyAsync(e => e.Id == rent.EventID);
             var skate = await db.Skates.FindAsync(rent.SkateID);
-            if (!userExists || !eventExists || skate == null)
+            var dbEvent = await db.Events.FindAsync(rent.EventID);
+            if (!userExists || skate == null || dbEvent == null)
             {
                 return Results.BadRequest("Invalid User or Event or Skate ID. Does not exist.");
             }
 
 
-            if (rent.SkateID != 0)
+            if (rent.FeetSize == 0 || rent.SkateID == 1)
+            {
+                rent.FeetSize = 0;
+                rent.SkateID = 1;
+            }
+            else
             {
                 bool isSkateTaken = await db.Rent.AnyAsync(r => r.SkateID == rent.SkateID && r.EventID == rent.EventID);
                 if (isSkateTaken)
@@ -52,12 +57,15 @@ public static class ManageRents
                 }
             }
 
-            if (skate.Size != rent.FeetSize)
+            if (rent.FeetSize != 0 && skate.Size != rent.FeetSize)
             {
                 return Results.BadRequest($"Feet size mismatch. This skate is size {skate.Size}.");
             }
 
-
+            if (dbEvent.AvailablePLaces > 0)
+            {
+                dbEvent.AvailablePLaces -= 1;
+            }
 
             db.Rent.Add(rent);
             await db.SaveChangesAsync();
@@ -100,7 +108,7 @@ public static class ManageRents
                 }
             }
 
-            if (skate.Size != updatedRent.FeetSize)
+            if (updatedRent.FeetSize != 0 && skate.Size != updatedRent.FeetSize)
             {
                 return Results.BadRequest($"Feet size mismatch. This skate is size {skate.Size}.");
             }
