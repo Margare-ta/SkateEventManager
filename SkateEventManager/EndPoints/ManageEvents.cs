@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using SkateEventManager.Models;
 
 namespace SkateEventManager.EndPoints;
@@ -9,14 +10,14 @@ public static class ManageEvents
     {
 
         //Get events in json
-        app.MapGet("/events", async (DatabaseContext db) =>
+        app.MapGet("/events", [AllowAnonymous] async (DatabaseContext db) =>
         {
-            var events = await db.Skates.ToListAsync();
+            var events = await db.Events.ToListAsync();
             return events.Count > 0 ? Results.Ok(events) : Results.NotFound("No event found.");
         });
 
         //Get event by Id
-        app.MapGet("/events/{id}", async (int id, DatabaseContext db) =>
+        app.MapGet("/events/{id}", [AllowAnonymous] async (int id, DatabaseContext db) =>
         {
             var searchEdvent = await db.Events.FindAsync(id);
             return searchEdvent is not null ? Results.Ok(searchEdvent) : Results.NotFound("Event not found.");
