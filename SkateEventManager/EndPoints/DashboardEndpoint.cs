@@ -56,16 +56,16 @@ public static class DashboardEndpoint
 
             //active events for the user
             var activeEventDetail = await db.Rent
-        .Where(r => r.UserID == user.Id && db.Events
-            .Where(e => e.Id == r.EventID && e.StartDate >= DateTime.UtcNow)
-            .Any())
-        .Select(r => new
-        {
-            EventID = r.EventID,
-            EventName = db.Events.Where(e => e.Id == r.EventID).Select(e => e.Name).FirstOrDefault(),
-            EventDate = db.Events.Where(e => e.Id == r.EventID).Select(e => e.StartDate).FirstOrDefault(),
-            SkateSize = db.Set<Skate>().Where(s => s.Id == r.SkateID).Select(s => s.Size).FirstOrDefault()
-        })
+                .Where(r => r.UserID == user.Id && db.Events
+                .Where(e => e.Id == r.EventID && e.StartDate >= DateTime.UtcNow)
+                .Any())
+                .Select(r => new
+                {
+                    EventID = r.Id,
+                    EventName = db.Events.Where(e => e.Id == r.EventID).Select(e => e.Name).FirstOrDefault(),
+                    EventDate = db.Events.Where(e => e.Id == r.EventID).Select(e => e.StartDate).FirstOrDefault(),
+                    SkateSize = db.Set<Skate>().Where(s => s.Id == r.SkateID).Select(s => s.Size).FirstOrDefault()
+                })
         .Distinct()
         .ToListAsync();
 
