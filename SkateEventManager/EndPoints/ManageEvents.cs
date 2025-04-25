@@ -23,6 +23,9 @@ public static class ManageEvents
             return searchEdvent is not null ? Results.Ok(searchEdvent) : Results.NotFound("Event not found.");
         });
 
+        //Get event by UserId
+
+
         //Add new event
         app.MapPost("/events", async (Event newEvent, DatabaseContext db) =>
         {
