@@ -1,0 +1,24 @@
+meta {
+  name: Change user's data
+  type: http
+  seq: 24
+}
+
+put {
+  url: http://localhost:3000/users
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwibmJmIjoxNzQ1NTgzODE1LCJleHAiOjE3NDU1OTEwMTUsImlhdCI6MTc0NTU4MzgxNX0.KBC0NhIjBDb9jryek-wJsEVWYgeYanX7p_u3JuuIjLI
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Kiss Jozsef",
+    "email": "kissjozsika@example.com",
+    "newPassword": "nagyonErosJelszo4321"
+  }
+}
