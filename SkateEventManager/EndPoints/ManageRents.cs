@@ -10,7 +10,7 @@ public static class ManageRents
         //Get rents in json
         app.MapGet("/rents", async (DatabaseContext db) =>
         {
-            var rents = await db.Skates.ToListAsync();
+            var rents = await db.Rent.ToListAsync();
             return rents.Count > 0 ? Results.Ok(rents) : Results.NotFound("No rents found.");
         });
 
