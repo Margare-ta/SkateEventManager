@@ -39,7 +39,8 @@ public static class AuthenticationEndpoints
             return Results.Ok(new
             {
                 message = "Login successful!",
-                token = tokenString
+                token = tokenString,
+                userId = userId
             });
         });
     }
