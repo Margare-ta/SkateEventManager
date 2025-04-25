@@ -13,6 +13,26 @@ public static class ManageSkates
             return skates.Count > 0 ? Results.Ok(skates) : Results.NotFound("No skates found.");
         });
 
+        //Get available  Skates
+        app.MapGet("/availableSkates", async (DatabaseContext db) =>
+        {
+            var now = DateTime.UtcNow;
+
+            var rentedSkateIds = await db.Rent
+                .Where(rent => db.Events
+                    .Any(e => e.Id == rent.EventID && e.EndDate > now))
+                .Select(rent => rent.SkateID)
+                .ToListAsync();
+
+            var availableSkates = await db.Skates
+                .Where(skate => !rentedSkateIds.Contains(skate.Id))
+                .ToListAsync();
+
+            return availableSkates.Any()
+                ? Results.Ok(availableSkates)
+                : Results.NotFound("No skates found.");
+        });
+
         // Get skate by id
         app.MapGet("/skates/{id}", async (int id, DatabaseContext db) =>
         {
