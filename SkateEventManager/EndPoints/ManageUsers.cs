@@ -9,13 +9,20 @@ public static class ManageUsers
     public static WebApplication GetUsers(this WebApplication app)
     {
         //Get user by id
-        app.MapGet("/currentUser/{id}", async (int id, DatabaseContext db) =>
+        app.MapGet("/currentUser/{id}", async (HttpContext http, int id, DatabaseContext db) =>
         {
-            var user = db.User.FirstOrDefault(u => u.Id == id);
+            //UserId from get call is not used
+            var userIdClaim = http.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
-            return user != null
-                ? Results.Ok(user)
-                : Results.NotFound("User not found.");
+            if (userIdClaim is null)
+                return Results.Unauthorized();
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var user = await db.User.FindAsync(userId);
+            if (user is null)
+                return Results.NotFound("User not found.");
+            return Results.Ok(user);
         });
 
         //Get all user
