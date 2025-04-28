@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SkateEventManager.Models;
+using System.Security.Claims;
 
 namespace SkateEventManager.EndPoints;
 
@@ -14,11 +15,24 @@ public static class ManageRents
             return rents.Count > 0 ? Results.Ok(rents) : Results.NotFound("No rents found.");
         });
 
-        //Get rent by UserId
-        app.MapGet("/rents/{UserId}", async (int UserId, DatabaseContext db) =>
+        //Get rent by UserId 
+        app.MapGet("/rents/{UserId}", async (HttpContext http, int UserId, DatabaseContext db) =>
         {
+            //UserId from get call is not used
+            var userIdClaim = http.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim is null)
+                return Results.Unauthorized();
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var user = await db.User.FindAsync(userId);
+            if (user is null)
+                return Results.NotFound("User not found.");
+
+
             var userRents = await db.Rent
-                .Where(b => b.UserID == UserId)
+                .Where(b => b.UserID == userId)
                 .Include(b => b.Event)
                 .Select(b => new
                 {
