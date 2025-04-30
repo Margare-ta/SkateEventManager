@@ -1,0 +1,734 @@
+{
+  "name": "SkateManager",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Add new Event",
+      "seq": 15,
+      "request": {
+        "url": "http://localhost:3000/events",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"startDate\": \"2025-06-11T10:00:00\",\n    \"endDate\": \"2025-06-12T18:00:00\",\n    \"name\": \"Skate Ring at Liget\",\n    \"availablePlaces\": 80,\n    \"accommodation\": 0,\n    \"reserved\": 17\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Add new Rent",
+      "seq": 13,
+      "request": {
+        "url": "http://localhost:3000/rents",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"UserId\": 5,\n    \"EventId\": 6,\n    \"FeetSize\": 0,\n    \"SkateId\": 4\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Change user's data",
+      "seq": 21,
+      "request": {
+        "url": "http://localhost:3000/users",
+        "method": "PUT",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwibmJmIjoxNzQ1NTgzODE1LCJleHAiOjE3NDU1OTEwMTUsImlhdCI6MTc0NTU4MzgxNX0.KBC0NhIjBDb9jryek-wJsEVWYgeYanX7p_u3JuuIjLI",
+            "enabled": true
+          },
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Kiss Jozsef\",\n  \"email\": \"kissjozsika@example.com\",\n  \"newPassword\": \"nagyonErosJelszo4321\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Dashboard json",
+      "seq": 7,
+      "request": {
+        "url": "http://localhost:3000/dashboard/5",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1IiwibmJmIjoxNzQ1NTg2NjY4LCJleHAiOjE3NDU1OTM4NjgsImlhdCI6MTc0NTU4NjY2OH0.HmVzNbz0SeSrzvZz4xpqIw0sIJRpdaxCiDStot9CR48",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Event",
+      "seq": 25,
+      "request": {
+        "url": "http://localhost:3000/events/2",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Rent by id",
+      "seq": 22,
+      "request": {
+        "url": "http://localhost:3000/rents/?id=5",
+        "method": "DELETE",
+        "headers": [],
+        "params": [
+          {
+            "name": "id",
+            "value": "5",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Rent",
+      "seq": 23,
+      "request": {
+        "url": "http://localhost:3000/rents/11",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete skate by id",
+      "seq": 24,
+      "request": {
+        "url": "http://localhost:3000/skates/63",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get all available Skates",
+      "seq": 10,
+      "request": {
+        "url": "http://localhost:3000/availableSkates",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NTY3Njc2LCJleHAiOjE3NDU1NzQ4NzYsImlhdCI6MTc0NTU2NzY3Nn0.RWxrEOHbK2BAoQjNhKu2eOQMja9G4p3PdVnaGEPClo0",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get all Event",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:3000/events",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NDAwMTE2LCJleHAiOjE3NDU0MDczMTYsImlhdCI6MTc0NTQwMDExNn0.DM7esXyC3fE4BHfjcs5iVLq-n1jxXo5cDJaz8h2lxUQ",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get all rents in json",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:3000/rents",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NTY3Njc2LCJleHAiOjE3NDU1NzQ4NzYsImlhdCI6MTc0NTU2NzY3Nn0.RWxrEOHbK2BAoQjNhKu2eOQMja9G4p3PdVnaGEPClo0",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get All Skates",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:3000/skates",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NDgwODI2LCJleHAiOjE3NDU0ODgwMjYsImlhdCI6MTc0NTQ4MDgyNn0.0qEoH0DpU6NbTgJHpeGIX7ukfHZq3avCgj2aw2xebUk",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get all user",
+      "seq": 9,
+      "request": {
+        "url": "http://localhost:3000/users",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NTgyMTIyLCJleHAiOjE3NDU1ODkzMjIsImlhdCI6MTc0NTU4MjEyMn0.k3poEiZZv99dogeuUvH1o5Yw8j_DFM4zRAhoZ4dFnxk",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Event by id",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:3000/events/1",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get rent by userId",
+      "seq": 8,
+      "request": {
+        "url": "http://localhost:3000/rents/4",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1ODM0NjQxLCJleHAiOjE3NDU4NDE4NDEsImlhdCI6MTc0NTgzNDY0MX0.k70gsgL5y0MkUmjHwW_qsRH0R6h88DWCHlHzXJ1fm9I",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Skate By Id",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:3000/skates/63",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNzQ1NDgwODI2LCJleHAiOjE3NDU0ODgwMjYsImlhdCI6MTc0NTQ4MDgyNn0.0qEoH0DpU6NbTgJHpeGIX7ukfHZq3avCgj2aw2xebUk",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get User by Id",
+      "seq": 6,
+      "request": {
+        "url": "http://localhost:3000/currentUser/2",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwibmJmIjoxNzQ1ODI5MjU0LCJleHAiOjE3NDU4MzY0NTQsImlhdCI6MTc0NTgyOTI1NH0.ejGPnbFsIOwnyQKYw5qUnxaZ-mJxmznRC_wgrwZYVtc",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login admin",
+      "seq": 18,
+      "request": {
+        "url": "http://localhost:3000/api/auth/login",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"adminjelszo234\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login user",
+      "seq": 12,
+      "request": {
+        "url": "http://localhost:3000/api/auth/login",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"SecurePass123\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login user2",
+      "seq": 17,
+      "request": {
+        "url": "http://localhost:3000/api/auth/login",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"email\": \"kissjozsika@example.com\",\n    \"password\": \"nagyonErosJelszo4321\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "New book (rent) whitout renting skate",
+      "seq": 14,
+      "request": {
+        "url": "http://localhost:3000/rents",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"UserId\": 2,\n    \"EventId\": 1,\n    \"FeetSize\": 0,\n    \"SkateId\": 94\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Register admin",
+      "seq": 19,
+      "request": {
+        "url": "http://localhost:3000/api/auth/register",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"name\": \"Admin\",\n    \"registerRequest\": {\n        \"email\": \"admin@example.com\",\n        \"password\": \"adminjelszo234\"\n    },\n    \"role\": 0\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Register user",
+      "seq": 11,
+      "request": {
+        "url": "http://localhost:3000/api/auth/register",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"name\": \"John Doe\",\n    \"registerRequest\": {\n        \"email\": \"johndoe@example.com\",\n        \"password\": \"SecurePass123\"\n    },\n    \"role\": 1\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Register user2",
+      "seq": 16,
+      "request": {
+        "url": "http://localhost:3000/api/auth/register",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"name\": \"Kis Anna\",\n    \"registerRequest\": {\n        \"email\": \"annaKicsi@example.com\",\n        \"password\": \"nagyonErosJelszo4321\"\n    },\n    \"role\": 1\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update rent",
+      "seq": 20,
+      "request": {
+        "url": "http://localhost:3000/rents/10",
+        "method": "PUT",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\" : 11,\n    \"userID\": 2,\n    \"eventID\": 2,\n    \"skateID\": 102,\n    \"feetSize\": 44\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "SkateManager",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
