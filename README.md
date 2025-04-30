@@ -28,4 +28,4 @@ This is the backend for the Skate Rent and Event Planner app, built with ASP.NET
 
 ## Important notes:
 Rents is defind as Book here!
-1 user can book for multiple events
+1 user can book for multiple events. 
