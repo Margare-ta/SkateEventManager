@@ -15,7 +15,7 @@ public static class ManageRents
             return rents.Count > 0 ? Results.Ok(rents) : Results.NotFound("No rents found.");
         });
 
-        //Get rent by UserId 
+        //Get rent by UserId
         app.MapGet("/rents/{UserId}", async (HttpContext http, int UserId, DatabaseContext db) =>
         {
             //UserId from get call is not used
@@ -29,7 +29,6 @@ public static class ManageRents
             var user = await db.User.FindAsync(userId);
             if (user is null)
                 return Results.NotFound("User not found.");
-
 
             var userRents = await db.Rent
                 .Where(b => b.UserID == userId)
